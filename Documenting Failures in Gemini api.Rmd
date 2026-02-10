@@ -1,0 +1,53 @@
+---
+title: "failures"
+output: html_document
+date: "2026-02-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+Failures from the process_strategies.r
+724 Mattawa... Complex structure returned gibberish.
+
+Somehow the api is reading data from hospitals outside of Ontario.
+Example if I pass the Strategic plan for hospital 826, Lake of the woods.
+I get back data from Henderson Hospital. which is somewhere in the US
+if I pass 826 as a specific through the Process_strategies.R software
+I get Eastern New Mexico Medical
+
+
+MOVING TO A PURE API TO READ PDF AND SCANNED PDF SOLVED THE ABVOE PROBLEMS
+WHICH WERE HALLUCINATIONS.
+
+Dealing with partnerships that duplicate strategies.
+Mississip river  alliance 3duplications 2 hospitals. 2 fac 1 name??? 16 differnt 
+Identical input for both 
+597=  4 lines in df
+626= 12 lines in df
+Same data represented twice. BUT in 597 data in "strategic Plan Priorities" rolled up into one text with <br> and 626 broke the priorties out. 
+All Data Captured
+
+Mics Group another partnership  but all treated the same
+
+Blanche River partnership with seperte fac
+huron health
+huron perth
+
+
+In some cases the API breaks actions apart into separate lines and in some it does not 
+Quinte it did
+but the classic is 597 which rolled up the actions, and 626 which didn't even though the plans are identical (partnership)
+
+
+FAC (736) for southlake didn't come across but name and all other data did.
+it also failed in a select test run with the controller
+Data was updated in the DF file. 
+FAC 800 was not properly presented in the strategic plan section I have asked for a copy to be mailed to me. 
+Until then the plan is deleted
+
