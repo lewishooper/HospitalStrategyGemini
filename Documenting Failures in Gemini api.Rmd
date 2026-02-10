@@ -51,3 +51,11 @@ Data was updated in the DF file.
 FAC 800 was not properly presented in the strategic plan section I have asked for a copy to be mailed to me. 
 Until then the plan is deleted
 
+Feb 10 2026
+Next issue for review Rural roads directions are coming through
+Working through the size of directions to identify issues
+have done all where directions are greater than or == 7
+now working through those where the # of directions is too small
+1 is fixe 
+rural roads, 684 problematic image pdf.
+
