@@ -32,6 +32,8 @@ Identical input for both
 626= 12 lines in df
 Same data represented twice. BUT in 597 data in "strategic Plan Priorities" rolled up into one text with <br> and 626 broke the priorties out. 
 All Data Captured
+### 
+
 
 Mics Group another partnership  but all treated the same
 
@@ -48,7 +50,7 @@ but the classic is 597 which rolled up the actions, and 626 which didn't even th
 FAC (736) for southlake didn't come across but name and all other data did.
 it also failed in a select test run with the controller
 Data was updated in the DF file. 
-FAC 800 was not properly presented in the strategic plan section I have asked for a copy to be mailed to me. 
+FAC 800 was not properly presented in the strategic plan section I have asked for a copy to be emailed to me. 
 Until then the plan is deleted
 
 Feb 10 2026
@@ -58,4 +60,17 @@ have done all where directions are greater than or == 7
 now working through those where the # of directions is too small
 1 is fixe 
 rural roads, 684 problematic image pdf.
+
+DIRECTIONS NOT FOUND
+ 
+947 UHN,  
+the API Moved the directions into the descriptive text and Then broke the actual decriptive text into actions
+the Chat window got the directions, Text, and Actions correct
+This was the only hospital where this was incorrectly done.
+The CHAT window version will be substituted into the DF
+
+Next version upgrades
+
+
+Lets try and get Enablers on a consistent basis.  In some cases we capture them and in some cases we don't
 

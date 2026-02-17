@@ -1,5 +1,20 @@
+This project is a process to download and analyze the hospital strategies.  
+The steps taken so far are detailed below.
 
-The following script is critical to this process
+1) gather strategic plans from ontario hospitals websites, as a pdf
+2) Using an API disaggregate those strategic plans into a dataframe consisting of 
+  a) the Hospital Name,an FAC(which is a unique identifier),each single direction, a text description of that Direction(if available),And actions related to that direction(if available
+  b) Each Direction is a single row, and the actions for that Direcion are concatenated with a separator <br>
+3) analysis of the directions both in aggregate and for each hospital
+
+At this point in the project we have achieved steps 1 and 2
+The hospital strategic plans are available as a separate file "G:\My Drive\Strategies"
+The following script is critical to this process and is how the Gemini API is used in step2
+
+What follows are three documents critical to the process
+1) The "Process_strategies.R" which was used to extract the elements needed in step 2
+2) the Extraction protocol 
+3) a sample of the output called FullData which is the working database used for step 3
 # ==============================================================================
 # STRATEGIC PLAN EXTRACTION ENGINE (FINAL PRODUCTION VERSION)
 # ==============================================================================
@@ -241,4 +256,11 @@ Current State As of Feb 10th, 2026
 this script works well for almost all of the hospitals
 Known issues are FAC 800 Hawksbury hospital which does not parse and. A physical copy of the plan is requested but is not yet availalbe
 Rural Roads hosptials 684 824 the pdf is not structured correctly however the data was right??
-A manual update was done.
+A manual update have been done for 4 hospitals.
+
+Sample Dataframe follows
+Hospital_Name	FAC	Plan_dates	Direction	Descriptive_text	Actions	Type
+UHN	947	2024-2028	TRANSFORMATIVE EXPERIENCES	We will create extraordinary, integrated health care experiences that are seamless, compassionate and centered around the patient, family and TeamUHN members. Every individual – whether receiving care or delivering it – deserves an environment that supports their needs. Our aspiration is to create a system that puts people first, empowers our staff, and delivers on our promises at every touchpoint.	Integrated Care<br>Break down barriers and create a unified, seamless health care experience that travels with the patient, wherever they go.<br><br>TeamUHN Experience<br>Build an environment where our team members are empowered, valued and ready to take bold action, day in and day out.<br><br>Lead in Education<br>Create world-class educational experiences that prepare the next generation of clinicians and scientists to push the limits of possibility.	Teaching Hospital
+UHN	947	2024-2028	SOLUTIONS BEYOND BOUNDARIES	UHN is leading the charge for radical innovation. That means investing in discovery like never before. New opportunities and solutions abound, and UHN must nurture and convert those.	Accelerate Research and Innovation<br>Create bold, breakthrough science-driven solutions to the world, improving outcomes for patients and health care systems globally.<br><br>Set Global Health Standards<br>Share our research, knowledge and innovations globally to redefine best practices and elevate health outcomes everywhere.<br><br>Transform Health Education<br>Focus on team-based, collaborative education that prepares learners for a rapidly evolving and exciting landscape.	Teaching Hospital
+UHN	947	2024-2028	ALIGNMENT FOR IMPACT	To create lasting change, we will align our resources, partnerships and technologies where they will have the greatest impact. UHN is called to drive real, transformative solutions that leverage the privilege of caring for patients, educating the health care providers and students of tomorrow, pursuing discovery and adoption. The future is here – and UHN is bringing it to life.	High-Impact Partnerships<br>Forge strategic alliances that will amplify our efforts and drive widespread, meaningful results.<br><br>Harness Technology to Revolutionize Care<br>Integrate AI and digital tools to enhance the precision, speed and personalization of treatment, from diagnosis to recovery.<br><br>Build a Thriving Health Care Ecosystem<br>Foster an interconnected system that accelerates progress and ensures sustainable improvements in health worldwide and addresses the translation, adoption and commercialization of scientific discoveries for people in Canada and around the world.	Teaching Hospital
+
