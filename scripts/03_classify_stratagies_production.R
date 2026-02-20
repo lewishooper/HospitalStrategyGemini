@@ -6,7 +6,7 @@
 # Inputs:  'clean_df_final' (Dataframe with Direction & Analysis_Corpus)
 # Outputs: 'Strategy_Master_Dataset.rds' in E:/HospitalStrategyGemini/Output/
 # ==============================================================================
-
+#rm(list=ls())
 library(tidyverse)
 library(httr2)
 library(stringr)
@@ -15,6 +15,10 @@ library(stringr)
 api_key <- Sys.getenv("GEMINI_API_KEY") 
 model_url <- "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 output_dir <- "E:/HospitalStrategyGemini/Output/"
+
+
+clean_df_final<-readRDS("E:/HospitalStrategyGemini/Output/CleanDFFinal.rds")
+
 
 # Define the canonical themes list (The "Source of Truth")
 THEME_DEFINITIONS <- "
@@ -89,7 +93,7 @@ classify_safe <- possibly(classify_strategy, otherwise = tibble(primary_theme = 
 print(paste("Starting classification on", nrow(clean_df_final), "strategies..."))
 
 raw_results <- clean_df_final %>%
-  select(FAC, Hospital_Name, Direction, Analysis_Corpus) %>%
+   select(FAC, Hospital_Name, Direction, Analysis_Corpus) %>%
   mutate(
     api_result = map2(Direction, Analysis_Corpus, function(d, c) {
       Sys.sleep(1.5) # Safety buffer
@@ -133,7 +137,13 @@ if (!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
 
 timestamp <- format(Sys.time(), "%Y%m%d_%H%M")
 saveRDS(final_dataset, paste0(output_dir, "Strategy_Master_Dataset_", timestamp, ".rds"))
-
+final_dataset<-readRDS(file.path(output_dir,"Strategy_Master_Dataset_20260218_1035.rds"))
 print(paste("✅ SUCCESS! Saved to:", output_dir))
 print("Final Distribution:")
 final_dataset %>% count(Standardized_Theme, sort = TRUE)
+
+## Need to add back the Type and MOH name, and dates.
+AddTypeAndDates<-clean_df_final %>%
+  select(FAC,MOH_Name,Type,Start_Year,End_Year) %>%
+  unique()
+final_dataset<-left_join(final_dataset,AddTypeAndDates,by="FAC")

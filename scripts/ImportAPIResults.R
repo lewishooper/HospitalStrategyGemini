@@ -9,6 +9,7 @@ library(stringr)
 #Yes# bring in, review and update the data from the Gemini API call in 
 # process_strategies.R
 source<-"E:/HospitalStrategyGemini/Source"
+output<-"E:/HospitalStrategyGemini/Output"
 GDRive<-"G:/My Drive/StrategyResults"
 DF<-read_csv("G:/My Drive/StrategyResults/Master_Strategy_Extract_20260216_1444.csv")
 DF<-DF %>%
@@ -114,7 +115,170 @@ DF<-DF %>%
   filter(FAC!=739)
 DF<-rbind(DF,Nipigon)
 
+#907 Timmons
+Timmons<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1015.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=907)
+DF<-rbind(DF,Timmons)
 
+
+#968 Muskoka Algonquin
+
+MHA<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1033.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=968)
+DF<-rbind(DF,MHA)
+
+
+#933 Windsor Regional
+
+wrh<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1033.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=933)
+DF<-rbind(DF,wrh)
+
+
+#FAC 927 Windsor Hotel deiu
+
+HDG<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1100.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=927)
+DF<-rbind(DF,HDG)
+
+#FAC 971 Sudbury St Josephs.
+
+SSGH<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1126.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=971)
+DF<-rbind(DF,SSGH)
+
+#FAC 972 Waypoint
+
+Waypoint<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1136.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=972)
+DF<-rbind(DF,Waypoint)
+
+
+#FAC 977 Terrance bay north of superior
+
+NOS<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1141.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=977)
+DF<-rbind(DF,NOS)
+
+
+#FAC 978 kINGSTON gENERAL
+
+kgh<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1145.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=978)
+DF<-rbind(DF,kgh)
+
+#980 Unity Health
+
+Unity<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1149.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=980)
+DF<-rbind(DF,Unity)
+
+
+
+
+#981 CKHA
+
+CKHA<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1154.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=981)
+DF<-rbind(DF,CKHA)
+
+#FAC 948 CAMH
+
+CAMH<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1200.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=948)
+DF<-rbind(DF,CAMH)
+
+
+#FAC 955 GBHS
+
+
+GBHS<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1204.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=955)
+DF<-rbind(DF,GBHS)
+
+#FAC XYZ Hospital
+
+#XYX<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_.csv")) %>%
+ # rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+#  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+ # mutate(FAC=as.character(FAC))%>%
+#  filter(Hospital_Name!=":---") %>%
+#  left_join(FullFACList,by="FAC")
+#DF<-DF %>%
+#  filter(FAC!=FAC)
+#DF<-rbind(DF,)
 
 
 ### End add in hospitals 
@@ -122,28 +286,59 @@ DF<-rbind(DF,Nipigon)
 Missing<-anti_join(FullFACList,DF,by="FAC") %>%
   left_join(DF,by="FAC")
 
-write_csv(Missing,"E:/HospitalStrategyGemini/Output/CheckMissing.csv")
+write_csv(Missing,"E:/HospitalStrategyGemini/Output/CheckMissing2.csv")
 
-DF<-left_join(DF,MOHFAC,by="FAC")
-DF$FAC=as.character(DF$FAC)
+#DF<-left_join(DF,MOHFAC,by="FAC")
+#DF$FAC=as.character(DF$FAC)
 
 
-DupDirections<-DF %>%
-  group_by(FAC,Direction) %>%
-  mutate(DirectionCount=n())
+DupDirections <- DF%>%
+  select(Hospital_Name,FAC) %>%
+  group_by(Hospital_Name) %>%
+  mutate(NDirections=n())
+
+# Fix stutter. in API
+#890 woodstock
+
+
+Woodstock<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_1214.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=890)
+DF<-rbind(DF,Woodstock)
 
 DoubleNF<-DF %>%
   filter(Actions=="NF")
+
+
+
+## End Fix Stutter
+
 
 ### need to catch more dates
 ##  Manual review required
 
 MissingDates<-DF %>%
-  select(Hospital_Name,FAC,Plan_dates) %>%
+  select(Hospital_Name,FAC,Plan_dates) %>% unique()%>%
   filter(Plan_dates=="NF") %>%
   unique()
 
 
+write.csv(MissingDates,file.path(output,"Missing_dates.csv"))
+DiscoveredDates<-read.csv(file.path(output,"RecoveredDates.csv")) %>%
+  select(Hospital_Name,FAC,Plan_dates) %>%
+  mutate(FAC=as.character(FAC))
+
+## updated dates new method and simpler code
+
+
+DF <- rows_update(DF, DiscoveredDates, by = "FAC")
+
+#Carry on from here. 
 
 ### 
 # Clean up the actions and organize for NLP
@@ -219,35 +414,36 @@ clean_df <- DF %>%
 ### ADD IN MANUALLY DISCOVERED DATES
 library(readxl)
 library(dplyr)
-
-# 1. Load your Excel file with the found dates
-# Replace 'path/to/your/file.xlsx' with your actual file path
-new_dates_df <- read_excel("E:/HospitalStrategyGemini/Source/ManualStartEndDates.xlsx") %>%
-  mutate(FAC=as.character(FAC)) %>%
-  rename(Start_Date_new='New Start DATE',End_Date_new='End Date') %>%
-  select(-Notes)
-
-# Ensure column names match for a smooth join
-# I am assuming your Excel columns are named: 'FAC', 'Start_Date', 'End_Date'
-# If not, rename them here:
-# new_dates_df <- new_dates_df %>% rename(FAC = `Your Excel Column Name`)
-
-# 2. Update the main dataframe
-DF_updated <- clean_df %>%
-  # Join the new dates to the main dataframe
-  left_join(new_dates_df, by = "FAC", suffix = c("", "_new")) %>%
-  
-  # Coalesce the columns: Take the original date; if it's missing, take the new one
-  mutate(
-    Start_Year = coalesce(as.numeric(Start_Year), as.numeric(Start_Date_new)),
-    End_Year   = coalesce(as.numeric(End_Year),   as.numeric(End_Date_new))
-  ) %>%
-  
-  # Remove the temporary "_new" columns from the join
-  select(-ends_with("_new"))
-
-# 3. Verification
-# Check how many dates are still missing
+# 
+# # 1. Load your Excel file with the found dates
+# # Replace 'path/to/your/file.xlsx' with your actual file path
+# #new_dates_df <- read_excel("E:/HospitalStrategyGemini/Source/ManualStartEndDates.xlsx") %>%
+#  # mutate(FAC=as.character(FAC)) %>%
+#   #rename(Start_Date_new='New Start DATE',End_Date_new='End Date') %>%
+#   #select(-Notes)
+# 
+# # Ensure column names match for a smooth join
+# # I am assuming your Excel columns are named: 'FAC', 'Start_Date', 'End_Date'
+# # If not, rename them here:
+# # new_dates_df <- new_dates_df %>% rename(FAC = `Your Excel Column Name`)
+# 
+# # 2. Update the main dataframe
+# DF_updated <- clean_df %>%
+#   # Join the new dates to the main dataframe
+#   left_join(new_dates_df, by = "FAC", suffix = c("", "_new")) %>%
+#   
+#   # Coalesce the columns: Take the original date; if it's missing, take the new one
+#   mutate(
+#     Start_Year = coalesce(as.numeric(Start_Year), as.numeric(Start_Date_new)),
+#     End_Year   = coalesce(as.numeric(End_Year),   as.numeric(End_Date_new))
+#   ) %>%
+#   
+#   # Remove the temporary "_new" columns from the join
+#   select(-ends_with("_new"))
+# 
+# # 3. Verification
+# # Check how many dates are still missing
+DF_updated<-clean_df
 print(paste("Missing Start Years:", sum(is.na(DF_updated$Start_Year))))
 print(paste("Missing End Years:", sum(is.na(DF_updated$End_Year))))
 
@@ -347,10 +543,12 @@ clean_df_final <- clean_df %>%
     Analysis_Corpus = apply_crosswalk(Analysis_Corpus, FAC, crosswalk)
   ) %>%
   ungroup()
-
+#note NF stripped out in 03_Classify_strategies_production.R
 
 
 saveRDS(DF,"E:/HospitalStrategyGemini/Output/StrategyFeb2026.rds")
 saveRDS(clean_df,"E:/HospitalStrategyGemini/Output/CleanStrategyFeb2026.rds")
-
+saveRDS(clean_df_final,"E:/HospitalStrategyGemini/Output/CleanDFFinal.rds")
 ##
+
+
