@@ -16,7 +16,7 @@ output_folder <- "G:/My Drive/StrategyResults"
 
 # RUN_MODE: "specific", "test_batch" (3 files), or "full"
 RUN_MODE  <- "specific"   
-TARGET_ID <- "736"       
+TARGET_ID <- "961"       
 
 # Ensure output directory exists
 fs::dir_create(output_folder)

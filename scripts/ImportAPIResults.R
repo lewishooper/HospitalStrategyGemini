@@ -69,6 +69,19 @@ DF<-DF %>%
 DF<-rbind(DF,MRH)  
 
 
+# FAC 966 bluewater health
+
+Bwh<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260220_1040.csv"))%>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+DF<-DF %>%
+  filter(FAC!=966)
+DF<-rbind(DF,Bwh)  
+
+
 ## FAC 656
 
 Wellington<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260216_1620.csv"))%>%
@@ -268,6 +281,54 @@ DF<-DF %>%
   filter(FAC!=955)
 DF<-rbind(DF,GBHS)
 
+
+#FAC 942 Hamilton Health 
+
+
+HHSC<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260220_1124.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC") %>%
+  mutate(Plan_dates="2025-2030")
+DF<-DF %>%
+  filter(FAC!=942)
+DF<-rbind(DF,HHSC)
+
+
+
+#FAC 666 St.JOes guelph
+
+StGH<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260220_1141.csv")) %>%
+  rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))%>%
+  filter(Hospital_Name!=":---") %>%
+  left_join(FullFACList,by="FAC")
+
+DF<-DF %>%
+  filter(FAC!=666)
+DF<-rbind(DF,StGH)
+
+#FAC 961 UOHI
+
+UOHI<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260220_1930.csv")) %>%
+ # rename(Hospital_Name="Hospital Name",FAC="Hospital FAC",Plan_dates="Plan Dates",Direction="Strategic Direction") %>%
+  #rename(Descriptive_text="Descriptive Text",Actions="Key Actions") %>%
+  mutate(FAC=as.character(FAC))
+  #rename(Type=Type.x) %>%
+#  rename(MOH_Name=MOH_Name.x) %>%
+ # select(-c(MOH_Name.y,Type.y))
+#  filter(Hospital_Name!=":---") %>%
+  #left_join(FullFACList,by="FAC")
+
+DF<-DF %>%
+  filter(FAC!=961)
+DF<-rbind(DF,UOHI)
+
+
+
 #FAC XYZ Hospital
 
 #XYX<-read_csv(file.path(GDRive,"Master_Strategy_Extract_20260217_.csv")) %>%
@@ -380,6 +441,12 @@ clean_df <- DF %>%
     Start_Year = as.numeric(str_extract(Plan_dates, "^\\d{4}")),
     End_Year   = as.numeric(str_extract(Plan_dates, "\\d{4}$")),
     
+###
+# correct start Date for the 2030 crowd
+##
+
+
+
     # --- Step D: Clean Hidden Characters ---
     # Replace non-breaking spaces (\xa0) and squash multiple spaces into one
     Descriptive_text = str_squish(Descriptive_text),
@@ -409,7 +476,8 @@ clean_df <- DF %>%
 
 # View the result
 #glimpse(clean_df)
-
+clean_df<-clean_df %>%
+  mutate(Start_Year=if_else(Start_Year==2030,2025,Start_Year))
 
 ### ADD IN MANUALLY DISCOVERED DATES
 library(readxl)

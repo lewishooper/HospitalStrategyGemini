@@ -147,3 +147,74 @@ AddTypeAndDates<-clean_df_final %>%
   select(FAC,MOH_Name,Type,Start_Year,End_Year) %>%
   unique()
 final_dataset<-left_join(final_dataset,AddTypeAndDates,by="FAC")
+
+#final_dataset<-readRDS("E:/HospitalStrategyGemini/Output/final_dataset.rds")
+# =============================================================================
+# FINAL DATA CLEANING - Applied before save so all downstream scripts
+# receive consistent, clean data from final_dataset.rds
+# =============================================================================
+
+# STEP 1: Strip unusual whitespace and malformed characters imported from Excel.
+# 65533 (U+FFFD) is the Unicode replacement character - appears as ? when
+# Excel's Windows-1252 non-breaking space (0xA0) survives encoding badly.
+# The intToUtf8/gsub approach catches it reliably where regex patterns miss it.
+final_dataset <- final_dataset %>%
+  mutate(across(where(is.character), \(x) {
+    x <- gsub(intToUtf8(65533), " ", x, fixed = TRUE)  # Unicode replacement char
+    x <- str_replace_all(x, "[\u00a0\u202f\u2002\u2003\u2009\u2007\ufeff]", " ")
+    str_squish(x)
+  })) %>%
+  
+  # STEP 2: Collapse Specialty sub-types into their parent categories.
+  # Specialty Children's Hospitals   --> Teaching Hospital
+  # Specialty Mental Health Hospitals --> Chronic and Rehabilitation
+  mutate(
+    Type = case_when(
+      str_detect(Type, regex("children",     ignore_case = TRUE)) ~ "Teaching Hospital",
+      str_detect(Type, regex("mental.health", ignore_case = TRUE)) ~ "Chronic and Rehabilitation",
+      TRUE ~ Type
+    )
+  )
+# STEP 3: Standardize Theme Names and Hospital Types
+# This uses Regex to remove any text inside parentheses and the parentheses themselves.
+# Example: "PATIENT CARE EXCELLENCE (Quality, safety, experience)" -> "PATIENT CARE EXCELLENCE"
+
+final_dataset <- final_dataset %>%
+  mutate(
+    # 1. Fix Hospital Type naming convention
+    Type = if_else(Type == "Chronic and Rehabilitation", "Chronic/Rehab Hospital", Type),
+    
+    # 2. Clean Primary Theme: Remove parenthetical descriptors and extra whitespace
+    primary_theme = primary_theme %>%
+      str_remove_all("\\s*\\(.*?\\)") %>%  # Removes " (anything inside)"
+      str_remove_all("^\\d+\\.\\s*") %>%   # Removes leading numbers like "1. "
+      str_squish() %>%                      # Removes double spaces or trailing spaces
+      str_to_upper(),                       # Ensures consistent CAPITALIZATION
+    
+    # 3. Clean Secondary Theme: Same logic
+    secondary_theme = secondary_theme %>%
+      str_remove_all("\\s*\\(.*?\\)") %>%
+      str_remove_all("^\\d+\\.\\s*") %>%
+      str_squish() %>%
+      str_to_upper()
+  )
+
+# Optional: Ensure "NONE" is handled for secondary themes
+final_dataset <- final_dataset %>%
+  mutate(secondary_theme = if_else(secondary_theme %in% c("NONE", "N/A", ""), NA_character_, secondary_theme))
+
+cat("✓ Final dataset cleaned:", nrow(final_dataset), "rows\n")
+
+cat("✓ Final dataset cleaned:", nrow(final_dataset), "rows,", ncol(final_dataset), "columns\n")
+cat("  Type distribution after collapsing specialties:\n")
+print(table(final_dataset$Type, useNA = "ifany"))
+
+
+# -- existing line below, do not change --
+saveRDS(final_dataset, file.path(output_dir, "final_dataset.rds"))
+ThemeTest<-final_dataset %>%
+  select(FAC,primary_theme,Standardized_Theme) %>%
+  group_by(primary_theme) %>%
+  mutate(n=n())
+  
+
