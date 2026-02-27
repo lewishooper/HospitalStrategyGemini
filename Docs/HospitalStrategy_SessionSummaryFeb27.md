@@ -118,6 +118,7 @@ With the keyword set finalized, the next phase is:
 - **Working directory:** `E:/HospitalStrategyGemini/`
 - **Output files:** `E:/HospitalStrategyGemini/Output/`
 - **R scripts:** `E:/HospitalStrategyGemini/scripts/`
+- **R graphics:** `E:/HospitalStrategyGemini/graphic/`
 
 ### Key Objects and Files
 - `final_dataset.rds` — prime data source (523 rows × 14 cols); `Analysis_Corpus` clean of NF tags; `any_match` column added this session

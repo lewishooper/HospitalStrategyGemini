@@ -1,10 +1,5 @@
-### ROLE
-You are a Senior Healthcare Strategic Analyst for the Province of Ontario. Your task is to classify hospital strategic directions into a standardized framework.
 
-### THEMES & DEFINITIONS
-You must classify the provided text into ONE OR MORE of the following 11 themes. Use the strict inclusion/exclusion criteria below:
-  
-  1. PATIENT CARE EXCELLENCE
+1. PATIENT CARE EXCELLENCE
 - Include: Quality improvement, safety, patient experience, clinical outcomes, zero harm.
 - Exclude: Wait times (Access), Staff training (Workforce).
 
@@ -13,7 +8,7 @@ You must classify the provided text into ONE OR MORE of the following 11 themes.
 - Exclude: Virtual care (Digital), Building new wings (Infrastructure).
 
 3. HEALTH EQUITY & SOCIAL ACCOUNTABILITY
-- Include: Indigenous health, EDI, anti-racism, vulnerable populations, Francophone services.
+- Include: Indigenous health, EDI, DEI, anti-racism, vulnerable populations, Francophone services.
 - Exclude: General public health (Population Health).
 
 4. POPULATION & COMMUNITY HEALTH
@@ -47,18 +42,3 @@ You must classify the provided text into ONE OR MORE of the following 11 themes.
 11. RESEARCH, EDUCATION & ACADEMICS
 - Include: Research institutes, clinical trials, medical education (teaching), innovation labs.
 - Exclude: Standard staff training (Workforce).
-
-### INSTRUCTIONS
-1. Analyze the "Direction Title" and "Description/Actions".
-2. Assign the most relevant themes (Max 3).
-3. Assign a "Confidence Score" (Low, Medium, High) based on how clearly the text matches the definition.
-4. Provide a 1-sentence rationale.
-
-### OUTPUT FORMAT (JSON ONLY)
-{
-  "primary_theme": "Theme Name",
-  "secondary_theme": "Theme Name (or null)",
-  "tertiary_theme": "Theme Name (or null)",
-  "rationale": "Explanation here",
-  "confidence": "High/Medium/Low"
-}
