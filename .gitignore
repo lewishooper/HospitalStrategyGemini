@@ -4,5 +4,11 @@
 .Ruserdata
 BatchFolder
 Source
+output/
+source/
+graphics/
+scripts/archive/
+scripts/visualization/
+Docs/
 
 
