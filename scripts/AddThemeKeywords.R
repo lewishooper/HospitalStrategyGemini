@@ -32,3 +32,4 @@ strategic_themes_updated %>%
   left_join(strategic_themes_revised %>% select(Theme_ID, old_count = n_keywords_retained), 
             by = "Theme_ID") %>%
   mutate(added = n_keywords_retained - old_count)
+
